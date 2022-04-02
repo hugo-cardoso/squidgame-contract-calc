@@ -1,0 +1,29 @@
+@import "reset.css";
+@import "fonts.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: codecpro, sans-serif;
+  background-color: rgb(0, 0, 13);
+  color: #FFF;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#__next {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
