@@ -18,6 +18,7 @@ const Home: NextPage = () => {
         </Head>
 
         <main className={styles.main}>
+          <h1 className={styles.title}>Squid NFT World - Contract Calculator</h1>
           <ContractCalculatorCard />
         </main>
       </div>
