@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Input } from '../Input';
+import { InputRadio } from '../InputRadio';
 import styles from './styles.module.css';
 
 enum FormFieldsNames {
@@ -55,6 +56,7 @@ export const ContractCalculatorCard = () => {
           name={FormFieldsNames.SquidEnergy}
           label="Squid Energy"
           type="number"
+          placeholder="0"
           required
         />
         <Input
@@ -65,19 +67,14 @@ export const ContractCalculatorCard = () => {
           float
           readonly
         />
-        <div className={styles.days}>
-          <label className={styles.days__label}>Contract duration (days)</label>
-          <div className={styles.days__options}>
-            <label className={styles.days__option}>
-              <span className={styles['days__option-text']}>15</span>
-              <input type="radio" name={FormFieldsNames.Duration} value="15"/>
-            </label>
-            <label className={styles.days__option}>
-              <span className={styles['days__option-text']}>30</span>
-              <input type="radio" name={FormFieldsNames.Duration} value="30" defaultChecked/>
-            </label>
-          </div>
-        </div>
+        <InputRadio
+          name={FormFieldsNames.Duration}
+          label="Contract duration (days)"
+          options={[
+            { label: "15", value: "15" },
+            { label: "30", value: "30", checked: true },
+          ]}
+        />
         <button
           type="submit"
           className={styles.button}

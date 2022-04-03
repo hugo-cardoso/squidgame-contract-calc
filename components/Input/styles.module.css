@@ -32,6 +32,10 @@
   color: rgb(74, 74, 96);
 }
 
+.input::-webkit-input-placeholder {
+  color: rgb(74, 74, 96);
+ }
+
 .input[type=number]::-webkit-inner-spin-button,
 .input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;

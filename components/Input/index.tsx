@@ -1,4 +1,4 @@
-import styles from "./Input.module.css";
+import styles from "./styles.module.css";
 
 type InputProps = {
   name?: string;
@@ -8,6 +8,7 @@ type InputProps = {
   float?: boolean;
   readonly?: boolean;
   value?: string | number;
+  placeholder?: string;
 };
 
 export const Input = ({
@@ -17,7 +18,8 @@ export const Input = ({
   required = false,
   float = false,
   readonly = false,
-  value = ""
+  value = "",
+  placeholder = "",
 }: InputProps) => {
 
   const generateAttrs = () => {
@@ -41,6 +43,7 @@ export const Input = ({
         className={styles.input}
         required={required}
         readOnly={readonly}
+        placeholder={placeholder}
         {...generateAttrs()}
       />
     </div>
