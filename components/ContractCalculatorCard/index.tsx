@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Input } from '../Input';
 import { InputRadio } from '../InputRadio';
 import styles from './styles.module.css';
@@ -20,6 +20,7 @@ export const ContractCalculatorCard = () => {
   const [result, setResult] = useState<number>(0);
   const [bswPrice, setBswPrice] = useState<number>(0);
   const [bswLoading, setBswLoading] = useState<boolean>(true);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const updateBswPrice = async () => {
     setBswLoading(true);
@@ -41,6 +42,10 @@ export const ContractCalculatorCard = () => {
     const result = calculateContract(Number(SquidEnergy.value), Number(Duration.value));
     setResult(result);
     setShowResult(true);
+    
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
   };
 
   useEffect(() => {
@@ -93,7 +98,7 @@ export const ContractCalculatorCard = () => {
         </button>
       </form>
       {showResult && (
-        <div className={styles.result}>
+        <div className={styles.result} ref={resultRef}>
           <div className={styles.result__col}>~ <Image src="/assets/images/bsw.svg" width={20} height={20} alt="BSW Logo" /> {result}</div>
           <div className={styles.result__col}>~ $ {Number(result * bswPrice).toFixed(2)}</div>
         </div>
