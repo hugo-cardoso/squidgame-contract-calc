@@ -71,52 +71,60 @@ export const ContractCalculatorCard = () => {
   }, [])
 
   return (
-    <div className={styles.card}>
-      <form
-        name="calculatorForm"
-        className={styles.form}
-        onSubmit={handleFormSubmit}
-      >
-        <Input
-          name={FormFieldsNames.SquidEnergy}
-          label="Squid Energy"
-          type="number"
-          placeholder="0"
-          required
-        />
-        <Input
-          name={FormFieldsNames.BswPrice}
-          label="BSW Price ($)"
-          type="number"
-          value={Number(bswPrice)}
-          loader={bswLoading}
-          placeholder="0"
-          float
-          readonly
-          required
-        />
-        <InputRadio
-          name={FormFieldsNames.Duration}
-          label="Contract duration (days)"
-          options={[
-            { label: "15", value: "15" },
-            { label: "30", value: "30", checked: true },
-          ]}
-        />
-        <button
-          type="submit"
-          className={styles.button}
+    <>
+      <div className={styles.card}>
+        <form
+          name="calculatorForm"
+          className={styles.form}
+          onSubmit={handleFormSubmit}
         >
-          Calculate
-        </button>
-      </form>
-      {showResult && (
-        <div className={styles.result} ref={resultRef}>
-          <div className={styles.result__col}>~ <Image src="/assets/images/bsw.svg" width={20} height={20} alt="BSW Logo" /> {result}</div>
-          <div className={styles.result__col}>~ $ {Number(result * bswPrice).toFixed(2)}</div>
-        </div>
-      )}
-      <p className={styles.phormula}>(SE * { SQUID_ENERGY_COST } BSW) * CONTRACT_DURATION - { PERCENTUAL_DISCOUNT }%</p>
-    </div>
+          <Input
+            name={FormFieldsNames.SquidEnergy}
+            label="Squid Energy"
+            type="number"
+            placeholder="0"
+            required
+          />
+          <Input
+            name={FormFieldsNames.BswPrice}
+            label="BSW Price ($)"
+            type="number"
+            value={Number(bswPrice)}
+            loader={bswLoading}
+            placeholder="0"
+            float
+            readonly
+            required
+          />
+          <InputRadio
+            name={FormFieldsNames.Duration}
+            label="Contract duration (days)"
+            options={[
+              { label: "15", value: "15" },
+              { label: "30", value: "30", checked: true },
+            ]}
+          />
+          <button
+            type="submit"
+            className={styles.button}
+          >
+            Calculate
+          </button>
+        </form>
+        {showResult && (
+          <div className={styles.result} ref={resultRef}>
+            <div className={styles.result__col}>~ <Image src="/assets/images/bsw.svg" width={20} height={20} alt="BSW Logo" /> {result}</div>
+            <div className={styles.result__col}>~ $ {Number(result * bswPrice).toFixed(2)}</div>
+          </div>
+        )}
+        <p className={styles.phormula}>(SE * { SQUID_ENERGY_COST } BSW) * CONTRACT_DURATION - { PERCENTUAL_DISCOUNT }%</p>
+      </div>
+      <div className={styles.powered}>
+        <p className={styles.powered__text}>Powered by Binance</p>
+        <a href="https://binance.com" target="_blank" rel="noopener noreferrer">
+          <Image src="/assets/images/binance.svg" height={30} width={200} alt="Binance Logo" />
+        </a>
+      </div>
+    </>
   );
 };
