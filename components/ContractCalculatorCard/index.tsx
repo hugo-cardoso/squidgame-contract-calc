@@ -4,6 +4,9 @@ import { Input } from '../Input';
 import { InputRadio } from '../InputRadio';
 import styles from './styles.module.css';
 
+const SQUID_ENERGY_COST = 0.0025;
+const PERCENTUAL_DISCOUNT = 5;
+
 enum FormFieldsNames {
   SquidEnergy = "SquidEnergy",
   BswPrice = "BswPrice",
@@ -26,15 +29,16 @@ export const ContractCalculatorCard = () => {
     setBswLoading(false);
   };
 
+  const calculateContract = (squidEnergy: number, duration: number) => {
+    return (squidEnergy * duration * SQUID_ENERGY_COST) * (1 - (PERCENTUAL_DISCOUNT / 100));
+  };
+
   const handleFormSubmit = (event: React.FormEvent<FormElements>) => {
     event.preventDefault();
 
-    const { SquidEnergy, BswPrice, Duration } = event.currentTarget;
+    const { SquidEnergy, Duration } = event.currentTarget;
 
-    const seCost = 0.0025;
-    const percentualDiscont = 5;
-
-    const result = (Number(SquidEnergy.value) * Number(Duration.value) * seCost) * (1 - (percentualDiscont / 100));
+    const result = calculateContract(Number(SquidEnergy.value), Number(Duration.value));
     setResult(result);
     setShowResult(true);
   };
