@@ -17,6 +17,10 @@
   line-height: 1.3;
 }
 
+.footer p:last-child {
+  margin-bottom: 0;
+}
+
 .footer p.highlight {
   color: rgb(255, 28, 94);
 }
