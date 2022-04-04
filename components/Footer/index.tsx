@@ -10,7 +10,7 @@ export const Footer = () => (
       <p>This site use Binance API to provide BSW price.</p>
     </div>
     <div className={styles['text-block']}>
-      <p>This site is not affiliated with Biswap. You and should be used for informational purposes only and not to be considered investment or financial advice.</p>
+      <p>This site is not affiliated with Biswap. You should be used for informational purposes only and should not be considered investment or financial advice.</p>
     </div>
   </footer>
 )
