@@ -61,6 +61,13 @@
   gap: 8px;
 }
 
+.phormula {
+  font-size: .8rem;
+  color: rgb(73, 73, 94);
+  text-align: center;
+  margin-top: 24px;
+}
+
 @media (max-width: 768px) {
   .card {
     width: 100%;

@@ -94,6 +94,7 @@ export const ContractCalculatorCard = () => {
           <div className={styles.result__col}>~ $ {Number(result * bswPrice).toFixed(2)}</div>
         </div>
       )}
+      <p className={styles.phormula}>(SE * 0,0025 BSW) * CONTRACT_DURATION - 5%</p>
     </div>
   );
 };
