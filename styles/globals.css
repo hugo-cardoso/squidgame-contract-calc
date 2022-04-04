@@ -27,10 +27,7 @@ a {
   justify-content: center;
   align-items: center;
   background: rgb(0,0,0);
-  /* background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,80,75,1) 100%); */
-  /* background: linear-gradient(0deg, rgba(0,80,75,1) 0%, rgba(0,0,0,1) 50%); */
-  /* background: radial-gradient(290.01% 100% at 50% 0%, rgb(0, 0, 13) 42.83%, rgb(13, 16, 28) 70%, rgb(0, 80, 75) 100%); */
-  background-image: url('/assets/images/background.png');
+  background-image: url('/assets/images/background.webp');
   background-size: cover;
   background-position: center;
 }

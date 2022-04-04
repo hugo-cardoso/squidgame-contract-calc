@@ -8,7 +8,7 @@ export const Footer = () => (
       <p className={styles.highlight}>0x169cfCc05EE609eE997b0382a3720C63cF6F86ad</p>
     </div>
     <div className={styles['text-block']}>
-      <p>This site is not affiliated with Biswap or Binance. You should be used for informational purposes only and should not be considered investment or financial advice.</p>
+      <p>This site is not affiliated with Biswap or Binance. Should be used for informational purposes only and should not be considered investment or financial advice.</p>
     </div>
     <div className={styles['text-block']}>
       <a href="https://github.com/hugo-cardoso/squidgame-contract-calc" target="_blank" rel="noreferrer" >
