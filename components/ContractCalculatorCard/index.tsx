@@ -30,6 +30,13 @@ export const ContractCalculatorCard = () => {
     setBswLoading(false);
   };
 
+  const sendGAEvent = ({ action, category, label }: Record<string, string>) => {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+    });
+  };
+
   const calculateContract = (squidEnergy: number, duration: number) => {
     return (squidEnergy * duration * SQUID_ENERGY_COST) * (1 - (PERCENTUAL_DISCOUNT / 100));
   };
@@ -42,6 +49,12 @@ export const ContractCalculatorCard = () => {
     const result = calculateContract(Number(SquidEnergy.value), Number(Duration.value));
     setResult(result);
     setShowResult(true);
+
+    sendGAEvent({
+      action: 'calculate',
+      category: 'contract',
+      label: 'calculate',
+    });
     
     setTimeout(() => {
       resultRef.current?.scrollIntoView({ behavior: 'smooth' });
