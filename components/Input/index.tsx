@@ -9,6 +9,7 @@ type InputProps = {
   readonly?: boolean;
   value?: string | number;
   placeholder?: string;
+  loader?: boolean;
 };
 
 export const Input = ({
@@ -20,6 +21,7 @@ export const Input = ({
   readonly = false,
   value = "",
   placeholder = "",
+  loader = false,
 }: InputProps) => {
 
   const generateAttrs = () => {
@@ -37,15 +39,18 @@ export const Input = ({
   return (
     <div className={styles['input-wrapper']}>
       <label className={styles.label}>{ label }</label>
-      <input
-        name={name}
-        type={type}
-        className={styles.input}
-        required={required}
-        readOnly={readonly}
-        placeholder={placeholder}
-        {...generateAttrs()}
-      />
+      <div className={styles['field-wrapper']}>
+      <div className={`${styles.loader} ${ loader && styles['loader--active'] }`} />
+        <input
+          name={name}
+          type={type}
+          className={styles.input}
+          required={required}
+          readOnly={readonly}
+          placeholder={placeholder}
+          {...generateAttrs()}
+        />
+      </div>
     </div>
   )
 }

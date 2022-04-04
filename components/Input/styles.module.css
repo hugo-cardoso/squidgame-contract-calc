@@ -41,3 +41,37 @@
     -webkit-appearance: none;
     margin: 0;
 }
+
+.field-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  animation: spin 1s linear infinite;
+  opacity: 0;
+  transition: .15s ease-in-out;
+}
+
+.loader--active {
+  opacity: 1;
+}

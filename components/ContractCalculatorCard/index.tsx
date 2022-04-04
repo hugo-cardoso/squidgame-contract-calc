@@ -16,11 +16,14 @@ export const ContractCalculatorCard = () => {
   const [showResult, setShowResult] = useState<boolean>(false);
   const [result, setResult] = useState<number>(0);
   const [bswPrice, setBswPrice] = useState<number>(0);
+  const [bswLoading, setBswLoading] = useState<boolean>(true);
 
   const updateBswPrice = async () => {
+    setBswLoading(true);
     const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BSWBUSD');
     const data = await response.json();
     setBswPrice(data.price);
+    setBswLoading(false);
   };
 
   const handleFormSubmit = (event: React.FormEvent<FormElements>) => {
@@ -64,8 +67,11 @@ export const ContractCalculatorCard = () => {
           label="BSW Price ($)"
           type="number"
           value={Number(bswPrice)}
+          loader={bswLoading}
+          placeholder="0"
           float
           readonly
+          required
         />
         <InputRadio
           name={FormFieldsNames.Duration}
