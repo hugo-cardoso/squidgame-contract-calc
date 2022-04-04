@@ -73,6 +73,7 @@ export const ContractCalculatorCard = () => {
   return (
     <>
       <div className={styles.card}>
+        <h1 className={styles.card__title}>Contract Calculator</h1>
         <form
           name="calculatorForm"
           className={styles.form}
@@ -120,7 +121,7 @@ export const ContractCalculatorCard = () => {
         <p className={styles.phormula}>(SE * { SQUID_ENERGY_COST } BSW) * CONTRACT_DURATION - { PERCENTUAL_DISCOUNT }%</p>
       </div>
       <div className={styles.powered}>
-        <p className={styles.powered__text}>Powered by Binance</p>
+        <p className={styles.powered__text}>Price Powered by Binance</p>
         <a href="https://binance.com" target="_blank" rel="noopener noreferrer">
           <Image src="/assets/images/binance.svg" height={30} width={200} alt="Binance Logo" />
         </a>
