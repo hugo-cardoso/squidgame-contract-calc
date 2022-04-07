@@ -34,6 +34,19 @@
   gap: 24px;
 }
 
+.showroom--error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.showroom__error {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 @media (max-width: 1024px) {
   .showroom {
     grid-template-columns: repeat(3, 1fr);

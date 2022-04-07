@@ -10,8 +10,7 @@ type MarketPlayerCardProps = {
 }
 
 export const MarketPlayerCard = ({ player, loading = false }: MarketPlayerCardProps) => {
-  const [imageQuality, setImageQuality] = useState<number>(30);
-  const [imageSize, setImageSize] = useState<number>(250);
+  const [imageError, setImageError] = useState<boolean>(false);
 
   const getPlayerAttribute = (attribute: string) => {
     return player?.nft.metadata.attributes.find(({ key }) => key === attribute);
@@ -33,27 +32,79 @@ export const MarketPlayerCard = ({ player, loading = false }: MarketPlayerCardPr
     return `https://marketplace.biswap.org/card/${ nft_contract }/${ nft_id }`;
   }
 
-  const handelOnLoadImage = () => {
-    setImageQuality(100);
-    setImageSize(400);
-  }
+  if (loading || !player) return <div className={styles.card}>
+    <div className={styles.card__image}>
+      <div className={styles['image-error']}></div>
+    </div>
+  </div>;
 
-  if (loading || !player) return <div className={styles.card}></div>;
+  const SquidEnergy = parsePlayerSquidEnergy(getPlayerAttribute('SquidEnergy')?.value || "0/0");
 
   return (
     <Link href={getUrl()}>
       <a className={styles.card} target="_blank">
         <div className={styles.card__image}>
-          <Image
-            src={player.nft.metadata.image}
-            alt={player.nft.metadata.name}
-            width={imageSize}
-            height={imageSize}
-            quality={imageQuality}
-            onLoad={handelOnLoadImage}
-          />
+          {
+            imageError ? (
+              <div className={styles['image-error']}>Not found</div>
+            ) : (
+              <Image
+                src={player.nft.metadata.image}
+                alt={player.nft.metadata.name}
+                width={400}
+                height={400}
+                quality={100}
+                layout="responsive"
+                priority
+                onError={() => setImageError(true)}
+              />
+            )
+          }
+        </div>
+        <div className={styles.card__header}>
+          <p className={styles.title}>#{ player.nft_id }</p>
+          <p className={styles.price}>{ formatPrice(String(player.usdPrice)) }</p>
         </div>
         <div className={styles.card__attributes}>
+          <div className={styles.attribute}>
+            <div className={styles.attribute__image}>
+              <Image
+                src="/assets/images/se.svg"
+                alt="SE"
+                width={20}
+                height={20}
+              />
+            </div>
+            <p className={styles.attribute__text}>
+              <span className={styles['attribute__text--higtlight']}>{ SquidEnergy[0] }</span>
+              { ' / ' }
+              { SquidEnergy[1] }
+            </p>
+          </div>
+          <div className={styles.attribute}>
+            <div className={styles.attribute__image}>
+              <Image
+                src="/assets/images/contract.png"
+                alt="Contract"
+                width={20}
+                height={20}
+              />
+            </div>
+            <p className={styles.attribute__text}>{ getPlayerAttribute("ContractDays")?.value }</p>
+          </div>
+          <div className={styles.attribute}>
+            <div className={styles.attribute__image}>
+              <Image
+                src="/assets/images/star.svg"
+                alt="Contract"
+                width={18}
+                height={18}
+              />
+            </div>
+            <p className={styles.attribute__text}>{ getPlayerAttribute("Level")?.value.split("-")[0] }</p>
+          </div>
+        </div>
+        {/* <div className={styles.card__attributes}>
           <div className={styles['card__attribute-name']}>#{player.nft_id}</div>
           <div className={styles['card__attribute-se']}>
             <div className={styles['card__attribute-se-text']}>
@@ -64,15 +115,16 @@ export const MarketPlayerCard = ({ player, loading = false }: MarketPlayerCardPr
                 height={20}
               />
               <p>
-                <span className={styles['card__attribute-se-text--hightlight']}>{ parsePlayerSquidEnergy(getPlayerAttribute("SquidEnergy")?.value || "0/0")[0] }</span> / 
-                { parsePlayerSquidEnergy(getPlayerAttribute("SquidEnergy")?.value || "0/0")[1] }
+                <span className={styles['card__attribute-se-text--hightlight']}>{ SquidEnergy[0] }</span>
+                {" / "}
+                { SquidEnergy[1] }
               </p>
             </div>
             <div className={styles['card__attribute-se-text']}>
               <p>{ formatPrice(String(player.usdPrice)) }</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </a>
     </Link>
   )

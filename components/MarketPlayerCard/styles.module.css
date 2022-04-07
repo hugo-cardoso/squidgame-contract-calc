@@ -1,11 +1,11 @@
 .card {
   width: 100%;
-  min-height: 316.41px;
+  min-height: 320.41px;
   border-radius: 8px;
   background-color: rgb(9, 9, 19);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   cursor: pointer;
   gap: 8px;
@@ -21,6 +21,9 @@
 .card__image {
   width: 100%;
   overflow: hidden;
+  margin-bottom: 4px;
+  background-color: rgb(5 5 12);
+  border-radius: 4px;
 }
 
 .card__image img {
@@ -28,44 +31,79 @@
 }
 
 .card__attributes {
-  display: flex;
   width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0 8px;
-  gap: 8px;
 }
 
-.card__attribute-name {
+.card__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.title {
   font-size: .9rem;
   font-weight: 600;
   letter-spacing: .03rem;
   color: rgb(255, 255, 255);
 }
 
-.card__attribute-se {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.price {
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .03rem;
+  color: rgb(255, 255, 255);
 }
 
-.card__attribute-se-text {
+.attribute {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color:rgb(126, 130, 157);
-  font-size: .9rem;
   gap: 8px;
 }
 
-.card__attribute-se-text--hightlight {
+.attribute__image {}
+
+.attribute__text {
+  color:rgb(126, 130, 157);
+  font-size: .9rem;
+}
+
+.attribute__text--higtlight {
   color: rgb(30, 187, 149);
   font-weight: 600;
 }
 
-.card__attribute-se-text p {
-  line-height: 1rem;
+.image-error {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: rgb(5 5 12);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(21, 21, 33);
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    min-height: 411.41px;
+  }
+
+  .card__attributes {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .attribute {
+    justify-content: flex-start;
+  }
 }
