@@ -1,0 +1,24 @@
+.button {
+  align-items: center;
+  border: 0px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 600;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  opacity: 1;
+  outline: 0px;
+  height: 40px;
+  font-size: 14px;
+  padding: 0px 16px;
+  background-color: rgb(43, 43, 64);
+  color: rgb(255, 255, 255);
+  appearance: none;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

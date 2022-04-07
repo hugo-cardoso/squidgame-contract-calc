@@ -1,15 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { Header } from "../components/Header";
 import { ContractCalculatorCard } from '../components/ContractCalculatorCard';
-import { Footer } from '../components/Footer';
 
-const Home: NextPage = () => {
+const ContractCalc: NextPage = () => {
 
   return (
     <>
-      <Header/>
       <div className={styles.container}>
         <Head>
           <title>Squid NFT World - Contract Calculator</title>
@@ -21,9 +18,8 @@ const Home: NextPage = () => {
           <ContractCalculatorCard />
         </main>
       </div>
-      <Footer />
     </>
   )
 }
 
-export default Home
+export default ContractCalc

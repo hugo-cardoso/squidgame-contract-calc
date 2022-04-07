@@ -73,7 +73,6 @@ export const ContractCalculatorCard = () => {
   return (
     <>
       <div className={styles.card}>
-        <h1 className={styles.card__title}>Contract Calculator</h1>
         <form
           name="calculatorForm"
           className={styles.form}
