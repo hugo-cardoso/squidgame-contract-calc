@@ -41,22 +41,10 @@ export const MarketContextProvider = ({ children }: MarketContextProviderProps) 
     return axios({
       url: '/api/market/players',
       params: {
-        page,
+        page: page - 1,
       }
     });
   };
-
-  // const updatePlayers = useCallback(async () => {
-  //   setLoading(false);
-  //   setLoading(true);
-  //   try {
-  //     const { data: { data: players} } = await fetchPlayers(page);
-  //     setPlayers(players);
-  //     setLoading(false);
-  //   } catch(e) {
-  //     setError(true);
-  //   }
-  // }, [page]);
 
   const updatePlayers = useCallback(async (page: number) => {
     setLoading(false);

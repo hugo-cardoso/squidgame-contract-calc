@@ -10,12 +10,17 @@
   line-height: 1;
   opacity: 1;
   outline: 0px;
-  height: 40px;
+  height: 50px;
   font-size: 14px;
   padding: 0px 16px;
   background-color: rgb(43, 43, 64);
   color: rgb(255, 255, 255);
   appearance: none;
+}
+
+.button--primary {
+  background-color: rgb(30, 187, 149);
+  box-shadow: rgb(30 187 149 / 32%) 0px 6px 24px, rgb(30 187 149) 0px 1px 0.5px inset, rgb(0 123 93) 0px -2px 1px inset;
 }
 
 .button:disabled {

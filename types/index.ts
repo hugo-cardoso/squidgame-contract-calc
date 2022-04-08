@@ -47,3 +47,17 @@ export type Player = {
   isFavorite: boolean;
   usdPrice: number;
 }
+
+export type SearchFilter = {
+  levels: [];
+  currencies: [];
+  onlyBoosted: boolean;
+  robiboost: {
+    from: number;
+    to: number;
+  };
+  usdRange: {
+    from: number;
+    to: number;
+  }
+}
