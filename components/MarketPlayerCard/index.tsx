@@ -61,70 +61,51 @@ export const MarketPlayerCard = ({ player, loading = false }: MarketPlayerCardPr
             )
           }
         </div>
-        <div className={styles.card__header}>
-          <p className={styles.title}>#{ player.nft_id }</p>
-          <p className={styles.price}>{ formatPrice(String(player.usdPrice)) }</p>
-        </div>
-        <div className={styles.card__attributes}>
-          <div className={styles.attribute}>
-            <div className={styles.attribute__image}>
-              <Image
-                src="/assets/images/se.svg"
-                alt="SE"
-                width={20}
-                height={20}
-              />
-            </div>
-            <p className={styles.attribute__text}>
-              <span className={styles['attribute__text--higtlight']}>{ SquidEnergy[0] }</span>
-              { ' / ' }
-              { SquidEnergy[1] }
-            </p>
+        <div className={styles.card__details}>
+          <div className={styles.card__header}>
+            <p className={styles.title}>#{ player.nft_id }</p>
+            <p className={styles.price}>{ formatPrice(String(player.usdPrice)) }</p>
           </div>
-          <div className={styles.attribute}>
-            <div className={styles.attribute__image}>
-              <Image
-                src="/assets/images/contract.png"
-                alt="Contract"
-                width={20}
-                height={20}
-              />
-            </div>
-            <p className={styles.attribute__text}>{ getPlayerAttribute("ContractDays")?.value }</p>
-          </div>
-          <div className={styles.attribute}>
-            <div className={styles.attribute__image}>
-              <Image
-                src="/assets/images/star.svg"
-                alt="Contract"
-                width={18}
-                height={18}
-              />
-            </div>
-            <p className={styles.attribute__text}>{ getPlayerAttribute("Level")?.value.split("-")[0] }</p>
-          </div>
-        </div>
-        {/* <div className={styles.card__attributes}>
-          <div className={styles['card__attribute-name']}>#{player.nft_id}</div>
-          <div className={styles['card__attribute-se']}>
-            <div className={styles['card__attribute-se-text']}>
-              <Image
-                src="/assets/images/se.svg"
-                alt="SE"
-                width={20}
-                height={20}
-              />
-              <p>
-                <span className={styles['card__attribute-se-text--hightlight']}>{ SquidEnergy[0] }</span>
-                {" / "}
+          <div className={styles.card__attributes}>
+            <div className={styles.attribute}>
+              <div className={styles.attribute__image}>
+                <Image
+                  src="/assets/images/se.svg"
+                  alt="SE"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <p className={styles.attribute__text}>
+                <span className={styles['attribute__text--higtlight']}>{ SquidEnergy[0] }</span>
+                { ' / ' }
                 { SquidEnergy[1] }
               </p>
             </div>
-            <div className={styles['card__attribute-se-text']}>
-              <p>{ formatPrice(String(player.usdPrice)) }</p>
+            <div className={styles.attribute}>
+              <div className={styles.attribute__image}>
+                <Image
+                  src="/assets/images/contract.png"
+                  alt="Contract"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <p className={styles.attribute__text}>{ getPlayerAttribute("ContractDays")?.value || 0 }</p>
+            </div>
+            <div className={styles.attribute}>
+              <div className={styles.attribute__image}>
+                <Image
+                  src="/assets/images/star.svg"
+                  alt="Contract"
+                  width={18}
+                  height={18}
+                />
+              </div>
+              <p className={styles.attribute__text}>{ getPlayerAttribute("Level")?.value.split("-")[0] }</p>
             </div>
           </div>
-        </div> */}
+        </div>
       </a>
     </Link>
   )

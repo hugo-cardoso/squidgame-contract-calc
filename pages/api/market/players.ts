@@ -23,8 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   }
 
-  console.log(body)
-
   const players = await axios({
     url: 'https://marketplace.biswap.org/back/offers/sellings',
     params: {

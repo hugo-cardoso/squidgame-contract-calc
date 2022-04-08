@@ -137,6 +137,7 @@
 @media (max-width: 768px) {
   .showroom {
     grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
   }
 }
 
