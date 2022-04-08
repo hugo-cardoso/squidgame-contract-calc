@@ -8,36 +8,33 @@ type Body = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
-    page = 0,
-    minPrice = 0,
-    maxPrice = 9999,
+    page,
+    minPrice,
+    maxPrice,
   } = req.query;
 
   const body: Body = {
     filter: {
       levels: [],
-      currencies: [],
       onlyBoosted: false,
-      robiboost: {
-        from: 0,
-        to: 0,
-      },
-      usdRange: {
-        from: Number(minPrice),
-        to: Number(maxPrice),
-      },
+      robiBoost: {from: 0, to: 0},
+      currencies: [],
+      usdRange: {from: Number(minPrice) || 0, to: Number(maxPrice) || 9999 }
     }
   }
 
+  console.log(body)
+
   const players = await axios({
-    url: `https://marketplace.biswap.org/back/offers/sellings?sortBy=newest&userAddress=no-address&page=${ page }&partner=61be229e6b84d59feeb0366c`,
+    url: 'https://marketplace.biswap.org/back/offers/sellings',
+    params: {
+      sortBy: 'newest',
+      userAddress: 'no-address',
+      page: page,
+      partner: '61be229e6b84d59feeb0366c'
+    },
     method: 'POST',
-    data: JSON.stringify(body),
-    headers: {
-      pragma: 'no-cache',
-      "cache-control": 'no-cache',
-      origin: "https://marketplace.biswap.org"
-    }
+    data: body,
   })
   res.status(200).json(players.data)
 };

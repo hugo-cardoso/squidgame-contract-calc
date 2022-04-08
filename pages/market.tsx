@@ -10,10 +10,19 @@ import { MarketPlayerCard } from '../components/MarketPlayerCard';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 
+enum FilterFormFieldsNames {
+  filterMinPrice = "filterMinPrice",
+  filterMaxPrice = "filterMaxPrice",
+}
+
+type FilterFormElements = Record<FilterFormFieldsNames, HTMLInputElement> & HTMLFormElement;
+
 const Market: NextPage = () => {
   const mainRef = useRef<HTMLDivElement>(null);
   const { players, page, loading, error, setPage, updatePlayers } = useContext(MarketContext);
   const [isOpenFilterModal, setIsOpenFilterModal] = useState<boolean>(false);
+  const filterMinPrice = useRef<number>(1);
+  const filterMaxPrice = useRef<number>(9999);
 
   const scrollToMain = () => {
     if (mainRef.current) {
@@ -26,23 +35,63 @@ const Market: NextPage = () => {
 
   const handleClickPrevPageBtn = () => {
     if (page > 1) {
-      setPage(page - 1);
-      scrollToMain();
+      const newPage = page - 1;
+
+      setPage(newPage);
+      updatePlayers({
+        page: newPage,
+        minPrice: filterMinPrice.current,
+        maxPrice: filterMaxPrice.current,
+      });
+      setTimeout(() => {
+        scrollToMain();
+      }, 500);
     };
   }
 
   const handleClickNextPageBtn = () => {
-    setPage(page + 1);
-    scrollToMain();
+    const newPage = page + 1;
+
+    setPage(newPage);
+    updatePlayers({
+      page: newPage,
+      minPrice: filterMinPrice.current,
+      maxPrice: filterMaxPrice.current,
+    });
+    setTimeout(() => {
+      scrollToMain();
+    }, 500);
   }
 
   const handleClickRefresh = () => {
-    updatePlayers(page);
+    updatePlayers({
+      page,
+      minPrice: filterMinPrice.current,
+      maxPrice: filterMaxPrice.current,
+    });
     scrollToMain();
   }
 
-  const handleSubmitFilterForm = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmitFilterForm = (event: FormEvent<FilterFormElements>) => {
     event.preventDefault();
+
+    const {
+      filterMinPrice: minPriceInput,
+      filterMaxPrice: maxPriceInput,
+    } = event.currentTarget;
+
+    const minPriceValue = minPriceInput.valueAsNumber;
+    const maxPriceValue = maxPriceInput.valueAsNumber;
+
+    filterMinPrice.current = minPriceValue;
+    filterMaxPrice.current = maxPriceValue;
+
+    updatePlayers({
+      page,
+      minPrice: minPriceValue,
+      maxPrice: maxPriceValue,
+    });
+
     setIsOpenFilterModal(false);
     scrollToMain();
   }
@@ -54,7 +103,11 @@ const Market: NextPage = () => {
           <p>Something went wrong.</p>
           <Button
             label="Try again"
-            onClick={() => updatePlayers(page)}
+            onClick={() => updatePlayers({
+              page,
+              minPrice: filterMinPrice.current,
+              maxPrice: filterMaxPrice.current,
+            })}
           />
         </div>
       )
@@ -88,10 +141,20 @@ const Market: NextPage = () => {
                       <Image src="/assets/images/close.svg" width={24} height={24} alt="Close"/>
                     </button>
                   </div>
-                  <Input type='number' label='Min price ($)' placeholder='0'/>
-                  <Input type='number' label='Max price ($)' placeholder='0'/>
-                  <Input type='number' label='Min SE' placeholder='0'/>
-                  <Input type='number' label='Max SE' placeholder='0'/>
+                  <Input
+                    type='number'
+                    label='Min price ($)'
+                    placeholder='0'
+                    name='filterMinPrice'
+                    value={filterMinPrice.current}
+                  />
+                  <Input
+                    type='number'
+                    label='Max price ($)'
+                    placeholder='0'
+                    name='filterMaxPrice'
+                    value={filterMaxPrice.current}
+                  />
                   <Button type='submit' label='Apply filters' color="primary"/>
                 </form>
               </div>

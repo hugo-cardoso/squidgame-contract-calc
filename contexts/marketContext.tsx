@@ -6,12 +6,18 @@ type FetchPlayersResponse = {
   data: Player[];
 };
 
+type UpdatePlayersParams = {
+  page: number;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
 type MarketContextStates = {
   players: Player[];
   loading: boolean;
   page: number;
   setPage: (page: number) => void;
-  updatePlayers: (page: number) => void,
+  updatePlayers: (options: UpdatePlayersParams) => void,
   error: boolean;
 };
 
@@ -37,20 +43,26 @@ export const MarketContextProvider = ({ children }: MarketContextProviderProps) 
   const [error, setError] = useState<boolean>(DEFAULT_STATE.error);
   const [page, setPage] = useState<number>(DEFAULT_STATE.page);
 
-  const fetchPlayers = (page: number): AxiosPromise<FetchPlayersResponse> => {
+  const fetchPlayers = ({
+    page,
+    minPrice = 0,
+    maxPrice = 9999
+  }: UpdatePlayersParams): AxiosPromise<FetchPlayersResponse> => {
     return axios({
       url: '/api/market/players',
       params: {
         page: page - 1,
+        minPrice,
+        maxPrice,
       }
     });
   };
 
-  const updatePlayers = useCallback(async (page: number) => {
+  const updatePlayers = useCallback(async (options: UpdatePlayersParams) => {
     setLoading(false);
     setLoading(true);
     try {
-      const { data: { data: players} } = await fetchPlayers(page);
+      const { data: { data: players} } = await fetchPlayers(options);
       setPlayers(players);
       setLoading(false);
     } catch(e) {
@@ -59,8 +71,10 @@ export const MarketContextProvider = ({ children }: MarketContextProviderProps) 
   }, []);
 
   useEffect(() => {
-    updatePlayers(page);
-  }, [updatePlayers, page]);
+    updatePlayers({
+      page: 1
+    });
+  }, [updatePlayers]);
 
   return (
     <MarketContext.Provider value={{ players, error, loading, page, setPage, updatePlayers }}>

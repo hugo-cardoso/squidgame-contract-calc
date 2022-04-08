@@ -52,7 +52,7 @@ export type SearchFilter = {
   levels: [];
   currencies: [];
   onlyBoosted: boolean;
-  robiboost: {
+  robiBoost: {
     from: number;
     to: number;
   };
